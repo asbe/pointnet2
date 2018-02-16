@@ -113,7 +113,7 @@ def train():
             accuracy = tf.reduce_sum(tf.cast(correct, tf.float32)) / float(BATCH_SIZE)
             tf.summary.scalar('accuracy', accuracy)
 
-            print "--- Get training operator"
+            print ("--- Get training operator")
             # Get training operator
             learning_rate = get_learning_rate(batch)
             tf.summary.scalar('learning_rate', learning_rate)
@@ -197,14 +197,14 @@ def train_one_epoch(sess, ops, train_writer):
     # Shuffle train samples
     train_idxs = np.arange(0, len(TRAIN_DATASET))
     np.random.shuffle(train_idxs)
-    num_batches = len(TRAIN_DATASET)/BATCH_SIZE
+    num_batches = int(len(TRAIN_DATASET)/BATCH_SIZE)
     
     log_string(str(datetime.now()))
 
     total_correct = 0
     total_seen = 0
     loss_sum = 0
-    for batch_idx in range(num_batches):
+    for batch_idx in range(int(num_batches)):
         start_idx = batch_idx * BATCH_SIZE
         end_idx = (batch_idx+1) * BATCH_SIZE
         batch_data, batch_label = get_batch(TRAIN_DATASET, train_idxs, start_idx, end_idx)
@@ -237,7 +237,7 @@ def eval_one_epoch(sess, ops, test_writer):
     global EPOCH_CNT
     is_training = False
     test_idxs = np.arange(0, len(TEST_DATASET))
-    num_batches = (len(TEST_DATASET)+BATCH_SIZE-1)/BATCH_SIZE
+    num_batches = (len(TEST_DATASET)+BATCH_SIZE-1)//BATCH_SIZE
 
     total_correct = 0
     total_seen = 0

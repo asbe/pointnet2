@@ -29,7 +29,7 @@ class ModelNetDataset():
             else:
                 self.catfile = os.path.join(self.root, 'shape_names.txt')
         self.cat = [line.rstrip() for line in open(self.catfile)]
-        self.classes = dict(zip(self.cat, range(len(self.cat))))  
+        self.classes = dict(list(zip(self.cat, list(range(len(self.cat))))))  
         self.normal_channel = normal_channel
         
         shape_ids = {}
@@ -84,10 +84,10 @@ class ModelNetDataset():
 
 if __name__ == '__main__':
     d = ModelNetDataset(root = '../data/modelnet40_normal_resampled', split='test', modelnet30=True)
-    print(len(d))
+    print((len(d)))
     import time
     tic = time.time()
     for i in range(100):
         ps, cls = d[i]
-    print(time.time() - tic)
-    print(ps.shape, type(ps), cls)
+    print((time.time() - tic))
+    print((ps.shape, type(ps), cls))

@@ -123,8 +123,8 @@ def eval_one_epoch(sess, ops, num_votes=1, topk=1):
     total_correct_class = [0 for _ in range(NUM_CLASSES)]
     
     
-    for batch_idx in range(num_batches):
-        print batch_idx, num_batches
+    for batch_idx in range(int(num_batches)):
+        print(batch_idx, num_batches)
         start_idx = batch_idx * BATCH_SIZE
         end_idx = min((batch_idx+1) * BATCH_SIZE, len(TEST_DATASET))
         bsize = end_idx - start_idx
