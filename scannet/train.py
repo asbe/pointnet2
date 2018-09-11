@@ -10,16 +10,24 @@ import os
 import sys
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(BASE_DIR)
-print(BASE_DIR)
-print(ROOT_DIR)
-sys.path.append(BASE_DIR)  # model
-sys.path.append(ROOT_DIR)  # provider
+# <<<<<<< HEAD
+# print(BASE_DIR)
+# print(ROOT_DIR)
+# sys.path.append(BASE_DIR)  # model
+# sys.path.append(ROOT_DIR)  # provider
+# =======
+# sys.path.append(BASE_DIR) # model
+# sys.path.append(ROOT_DIR) # provider
+# >>>>>>> upstream/master
 sys.path.append(os.path.join(ROOT_DIR, 'utils'))
 import provider
 import tf_util
 import pc_util
+# <<<<<<< HEAD
 #sys.path.append(os.path.join(ROOT_DIR, 'unit_test'))
 #import unit_test
+# =======
+# >>>>>>> upstream/master
 sys.path.append(os.path.join(ROOT_DIR, 'data_prep'))
 import scannet_dataset
 
@@ -131,11 +139,18 @@ def train():
             bn_decay = get_bn_decay(batch)
             tf.summary.scalar('bn_decay', bn_decay)
 
+<<<<<<< HEAD
             print("--- Get model and loss")
             # Get model and loss
             pred, end_points = MODEL.get_model(
                 pointclouds_pl, is_training_pl, NUM_CLASSES, bn_decay=bn_decay)
             loss = MODEL.get_loss(pred, labels_pl, smpws_pl, end_points)
+# =======
+#             print "--- Get model and loss"
+#             # Get model and loss
+#             pred, end_points = MODEL.get_model(pointclouds_pl, is_training_pl, NUM_CLASSES, bn_decay=bn_decay)
+#             loss = MODEL.get_loss(pred, labels_pl, smpws_pl)
+# >>>>>>> upstream/master
             tf.summary.scalar('loss', loss)
 
             correct = tf.equal(tf.argmax(pred, 2), tf.to_int64(labels_pl))
